@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aashik K. Jha | Skills</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+        <div class="bg-pattern"></div>
+    </div>
+
+    <!-- Include Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Skills Section -->
+        <section class="skills section">
+            <div class="container">
+                <h2 class="section-title">My Skills</h2>
+                
+                <!-- Technical Skills Section -->
+                <div class="skills-section">
+                    <h3 class="skills-subtitle">Technical Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <h3>HTML/CSS</h3>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-percentage" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <h3>JavaScript</h3>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-percentage" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <h3>Python</h3>
+                                <span>88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-percentage" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <h3>React</h3>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-percentage" style="width: 80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <h3>Figma</h3>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-percentage" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Soft Skills Section -->
+                <div class="skills-section">
+                    <h3 class="skills-subtitle">Soft Skills</h3>
+                    <div class="soft-skills-grid">
+                        <div class="soft-skill-card">
+                            <i class="fas fa-comments"></i>
+                            <h3>Communication</h3>
+                            <p>Excellent verbal and written communication skills in multiple languages</p>
+                        </div>
+                        <div class="soft-skill-card">
+                            <i class="fas fa-users"></i>
+                            <h3>Team Work</h3>
+                            <p>Strong ability to collaborate and work effectively in team environments</p>
+                        </div>
+                        <div class="soft-skill-card">
+                            <i class="fas fa-lightbulb"></i>
+                            <h3>Problem Solving</h3>
+                            <p>Analytical thinking and creative problem-solving abilities</p>
+                        </div>
+                        <div class="soft-skill-card">
+                            <i class="fas fa-tasks"></i>
+                            <h3>Project Management</h3>
+                            <p>Experience in managing and coordinating multiple projects</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Technologies Section -->
+                <div class="skills-section">
+                    <h3 class="skills-subtitle">Tools & Technologies</h3>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <img src="tools/vscode.png" alt="VS Code">
+                            <h3>VS Code</h3>
+                        </div>
+                        <div class="tool-card">
+                            <img src="tools/git.png" alt="Git">
+                            <h3>Git</h3>
+                        </div>
+                        <div class="tool-card">
+                            <img src="tools/photoshop.png" alt="Adobe Photoshop">
+                            <h3>Photoshop</h3>
+                        </div>
+                        <div class="tool-card">
+                            <img src="tools/figma.png" alt="Figma">
+                            <h3>Figma</h3>
+                        </div>
+                        <div class="tool-card">
+                            <i class="fas fa-robot"></i>
+                            <h3>ChatGPT</h3>
+                        </div>
+                        <div class="tool-card">
+                            <i class="fas fa-brain"></i>
+                            <h3>Midjourney</h3>
+                        </div>
+                        <div class="tool-card">
+                            <i class="fas fa-magic"></i>
+                            <h3>DALL-E</h3>
+                        </div>
+                        <div class="tool-card">
+                            <i class="fas fa-paint-brush"></i>
+                            <h3>Adobe Firefly</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $("#nav-placeholder").load("nav.html", function() {
+                // Add active class to skills link
+                $('a[href="skills.html"]').addClass('active');
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html> 

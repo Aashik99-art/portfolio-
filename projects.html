@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aashik K. Jha | Projects</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+        <div class="bg-pattern"></div>
+    </div>
+
+    <!-- Include Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Projects Section -->
+        <section class="projects section">
+            <div class="container">
+                <h2 class="section-title">My Projects</h2>
+                
+                <!-- Project Categories -->
+                <div class="project-categories">
+                    <button class="category-btn" data-category="git">Git & GitHub</button>
+                    <button class="category-btn active" data-category="game">Game Development</button>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Git Project -->
+                    <article class="project-card" data-category="git">
+                        <div class="project-image">
+                            <img src="git.jpg" alt="Git & GitHub Integration">
+                            <div class="project-overlay">
+                                <div class="project-details">
+                                    <h3>Git & GitHub Integration</h3>
+                                    <p>Version control and collaboration showcase</p>
+                                    <div class="project-tech">
+                                        <span>Git</span>
+                                        <span>GitHub</span>
+                                        <span>Version Control</span>
+                                    </div>
+                                    <div class="project-links">
+                                        <a href="https://github.com/Aashik99-art" target="_blank" class="btn project-link">
+                                            <i class="fab fa-github"></i> View on GitHub
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Game Project -->
+                    <article class="project-card" data-category="game">
+                        <div class="project-image">
+                            <img src="ball.jpg" alt="Catch the Ball Game">
+                            <div class="project-overlay">
+                                <div class="project-details">
+                                    <h3>Catch the Ball!</h3>
+                                    <p>An interactive game with three difficulty levels</p>
+                                    <div class="project-tech">
+                                        <span>HTML5</span>
+                                        <span>CSS3</span>
+                                        <span>JavaScript</span>
+                                    </div>
+                                    <div class="project-links">
+                                        <button class="btn project-link play-game-btn" data-game="game.html">
+                                            <i class="fas fa-gamepad"></i> Play Game
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Hangman Game -->
+                    <article class="project-card" data-category="game">
+                        <div class="project-image">
+                            <img src="hangman.jpg" alt="Hangman Game">
+                            <div class="project-overlay">
+                                <div class="project-details">
+                                    <h3>Hangman</h3>
+                                    <p>Classic word guessing game with three difficulty levels</p>
+                                    <div class="project-tech">
+                                        <span>HTML5</span>
+                                        <span>CSS3</span>
+                                        <span>JavaScript</span>
+                                    </div>
+                                    <div class="project-links">
+                                        <button class="btn project-link play-game-btn" data-game="hangman.html">
+                                            <i class="fas fa-gamepad"></i> Play Game
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Game Modal -->
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <iframe id="gameFrame" src="" frameborder="0"></iframe>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $("#nav-placeholder").load("nav.html", function() {
+                // Add active class to projects link
+                $('a[href="projects.html"]').addClass('active');
+            });
+        });
+
+        // Project filtering
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        // Initially show only game projects
+        projectCards.forEach(card => {
+            if (card.dataset.category !== 'game') {
+                card.style.display = 'none';
+            }
+        });
+
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const category = btn.dataset.category;
+
+                projectCards.forEach(card => {
+                    if (card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Game Modal functionality
+        const modal = document.getElementById('gameModal');
+        const playBtns = document.querySelectorAll('.play-game-btn');
+        const closeBtn = document.querySelector('.close-modal');
+
+        playBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const gameFile = btn.dataset.game;
+                modal.style.display = 'block';
+                document.getElementById('gameFrame').src = gameFile;
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.getElementById('gameFrame').src = '';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.getElementById('gameFrame').src = '';
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html> 

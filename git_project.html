@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git & GitHub Integration | Aashik K. Jha</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .git-container {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .git-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .git-image {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .git-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 8px 16px;
+            border-radius: 4px;
+            background: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: var(--secondary-color);
+        }
+        .git-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+        <div class="bg-pattern"></div>
+    </div>
+
+    <!-- Include Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <section class="project-detail section">
+            <div class="container">
+                <h2 class="section-title">Git & GitHub Integration</h2>
+                
+                <div class="project-info">
+                    <p>This project demonstrates my Git and GitHub skills, showcasing version control and collaboration capabilities.</p>
+                    
+                    <div class="project-tech">
+                        <span>Git</span>
+                        <span>GitHub</span>
+                        <span>Version Control</span>
+                    </div>
+
+                    <img src="git.jpg" alt="Git Integration" class="git-image">
+
+                    <div class="git-stats">
+                        <div class="stat-card">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">Repositories</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Commits</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">5+</div>
+                            <div class="stat-label">Projects</div>
+                        </div>
+                    </div>
+
+                    <div class="git-container">
+                        <div class="git-header">
+                            <h3>GitHub Profile</h3>
+                            <div class="git-actions">
+                                <a href="https://github.com/Aashik99-art" class="btn" target="_blank">
+                                    <i class="fab fa-github"></i> Visit Profile
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <div class="project-links">
+                            <h4>Featured Repositories:</h4>
+                            <ul>
+                                <li>
+                                    <a href="https://github.com/Aashik99-art/C-project-" target="_blank">
+                                        <i class="fas fa-code"></i> C/C++ Projects
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Aashik99-art/Python-" target="_blank">
+                                        <i class="fab fa-python"></i> Python Projects
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://github.com/Aashik99-art" target="_blank">
+                                        <i class="fas fa-laptop-code"></i> Portfolio Website
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $("#nav-placeholder").load("nav.html");
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html> 

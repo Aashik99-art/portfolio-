@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Match Puzzle</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Space Grotesk', sans-serif;
+            color: white;
+        }
+
+        #game-container {
+            position: relative;
+            width: 500px;
+            height: 600px;
+            background: #2a2a2a;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #game-area {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .basket {
+            position: absolute;
+            width: 100px;
+            height: 40px;
+            bottom: 20px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        #red-basket {
+            background: #FF5252;
+            left: 50px;
+        }
+
+        #blue-basket {
+            background: #2196F3;
+            left: 200px;
+        }
+
+        #green-basket {
+            background: #4CAF50;
+            left: 350px;
+        }
+
+        .block {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            top: -40px;
+        }
+
+        .red-block {
+            background: #FF5252;
+        }
+
+        .blue-block {
+            background: #2196F3;
+        }
+
+        .green-block {
+            background: #4CAF50;
+        }
+
+        #score {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            color: white;
+        }
+
+        #timer {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: white;
+        }
+
+        #difficulty-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .difficulty-btn {
+            width: 200px;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .difficulty-btn:hover {
+            transform: scale(1.05);
+        }
+
+        #easy-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        #medium-btn {
+            background: #FFA500;
+            color: white;
+        }
+
+        #hard-btn {
+            background: #FF0000;
+            color: white;
+        }
+
+        #game-over {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 5;
+        }
+
+        #restart-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        #restart-btn:hover {
+            background: #45a049;
+        }
+
+        .difficulty-info {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .difficulty-info p {
+            margin: 5px 0;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="game-area">
+            <div id="difficulty-screen">
+                <h2>Select Difficulty</h2>
+                <button id="easy-btn" class="difficulty-btn">Easy</button>
+                <button id="medium-btn" class="difficulty-btn">Medium</button>
+                <button id="hard-btn" class="difficulty-btn">Hard</button>
+                <div class="difficulty-info">
+                    <p>Easy: Slow falling speed, 60 seconds timer</p>
+                    <p>Medium: Normal speed, 45 seconds timer</p>
+                    <p>Hard: Fast speed, 30 seconds timer</p>
+                </div>
+            </div>
+            <div id="red-basket" class="basket"></div>
+            <div id="blue-basket" class="basket"></div>
+            <div id="green-basket" class="basket"></div>
+            <div id="score">Score: 0</div>
+            <div id="timer">Time: 60</div>
+            <div id="game-over">
+                <h2>Game Over!</h2>
+                <p>Your final score: <span id="final-score">0</span></p>
+                <button id="restart-btn">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const gameArea = document.getElementById('game-area');
+        const scoreElement = document.getElementById('score');
+        const timerElement = document.getElementById('timer');
+        const gameOverScreen = document.getElementById('game-over');
+        const finalScoreElement = document.getElementById('final-score');
+        const restartBtn = document.getElementById('restart-btn');
+        const difficultyScreen = document.getElementById('difficulty-screen');
+        const easyBtn = document.getElementById('easy-btn');
+        const mediumBtn = document.getElementById('medium-btn');
+        const hardBtn = document.getElementById('hard-btn');
+
+        let score = 0;
+        let timeLeft = 60;
+        let timer;
+        let blockInterval;
+        let isGameOver = false;
+        let currentDifficulty = {
+            speed: 3,
+            time: 60,
+            spawnRate: 1500
+        };
+
+        // Difficulty settings
+        const difficulties = {
+            easy: {
+                speed: 3,
+                time: 60,
+                spawnRate: 1500
+            },
+            medium: {
+                speed: 5,
+                time: 45,
+                spawnRate: 1000
+            },
+            hard: {
+                speed: 8,
+                time: 30,
+                spawnRate: 700
+            }
+        };
+
+        // Create colored blocks
+        function createBlock() {
+            if (isGameOver) return;
+
+            const colors = ['red', 'blue', 'green'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            const block = document.createElement('div');
+            block.className = `block ${color}-block`;
+            block.style.left = `${Math.random() * 460}px`;
+            gameArea.appendChild(block);
+
+            let position = -40;
+            const fallInterval = setInterval(() => {
+                if (position >= 560) {
+                    clearInterval(fallInterval);
+                    block.remove();
+                    if (!isGameOver) {
+                        gameOver();
+                    }
+                } else {
+                    position += currentDifficulty.speed;
+                    block.style.top = `${position}px`;
+
+                    // Check collision with baskets
+                    const blockRect = block.getBoundingClientRect();
+                    const baskets = document.querySelectorAll('.basket');
+                    
+                    baskets.forEach(basket => {
+                        const basketRect = basket.getBoundingClientRect();
+                        if (
+                            blockRect.bottom >= basketRect.top &&
+                            blockRect.right >= basketRect.left &&
+                            blockRect.left <= basketRect.right
+                        ) {
+                            if (block.classList.contains(`${basket.id.split('-')[0]}-block`)) {
+                                clearInterval(fallInterval);
+                                block.remove();
+                                score += 10;
+                                scoreElement.textContent = `Score: ${score}`;
+                            } else {
+                                clearInterval(fallInterval);
+                                block.remove();
+                                score -= 5;
+                                scoreElement.textContent = `Score: ${score}`;
+                            }
+                        }
+                    });
+                }
+            }, 30);
+        }
+
+        function updateTimer() {
+            timeLeft--;
+            timerElement.textContent = `Time: ${timeLeft}`;
+            
+            if (timeLeft <= 0) {
+                gameOver();
+            }
+        }
+
+        function gameOver() {
+            isGameOver = true;
+            clearInterval(timer);
+            clearInterval(blockInterval);
+            finalScoreElement.textContent = score;
+            gameOverScreen.style.display = 'block';
+        }
+
+        function startGame(difficulty) {
+            currentDifficulty = difficulties[difficulty];
+            isGameOver = false;
+            score = 0;
+            timeLeft = currentDifficulty.time;
+            scoreElement.textContent = `Score: ${score}`;
+            timerElement.textContent = `Time: ${timeLeft}`;
+            gameOverScreen.style.display = 'none';
+            difficultyScreen.style.display = 'none';
+
+            // Clear any existing blocks
+            document.querySelectorAll('.block').forEach(block => block.remove());
+
+            // Start timer
+            timer = setInterval(updateTimer, 1000);
+
+            // Start creating blocks
+            blockInterval = setInterval(createBlock, currentDifficulty.spawnRate);
+        }
+
+        function showDifficultyScreen() {
+            difficultyScreen.style.display = 'flex';
+            gameOverScreen.style.display = 'none';
+        }
+
+        // Event listeners for difficulty buttons
+        easyBtn.addEventListener('click', () => startGame('easy'));
+        mediumBtn.addEventListener('click', () => startGame('medium'));
+        hardBtn.addEventListener('click', () => startGame('hard'));
+        restartBtn.addEventListener('click', showDifficultyScreen);
+
+        // Show difficulty screen initially
+        showDifficultyScreen();
+    </script>
+</body>
+</html> 

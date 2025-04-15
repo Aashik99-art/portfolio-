@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aashik K. Jha | Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+        <div class="bg-pattern"></div>
+    </div>
+
+    <!-- Include Navigation -->
+    <div id="nav-placeholder"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero section">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="gradient-text">Hello, I'm Aashik</h1>
+                        <div class="hero-subtitle">
+                            <span class="typed-text"></span><span class="cursor">&nbsp;</span>
+                        </div>
+                        <p class="hero-description">Transforming ideas into digital reality through code and design.</p>
+                        <div class="hero-buttons">
+                            <a href="projects.html" class="btn primary">View Projects</a>
+                            <a href="contact.html" class="btn secondary">Get in Touch</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="profile.jpg" alt="Aashik K. Jha">
+                        <div class="hero-image-bg"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $("#nav-placeholder").load("nav.html", function() {
+                // Add active class to home link
+                $('a[href="index.html"]').addClass('active');
+            });
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html> 
